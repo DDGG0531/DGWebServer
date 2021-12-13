@@ -4,8 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var member = require('./routes/member');
-var users = require('./routes/users');
+var product = require('./routes/product');
+// var member = require('./routes/member');
+// var users = require('./routes/users');
 
 
 var app = express();
@@ -27,8 +28,9 @@ app.use(function (req, res, next) {
 });
 
 
-app.use('/', member);
-app.use('/users', users);
+app.use('/', product);
+// app.use('/', member);
+// app.use('/users', users);
 
 
 // catch 404 and forward to error handler

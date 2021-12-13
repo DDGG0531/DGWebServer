@@ -7,6 +7,7 @@ const verify = require('../models/verification');
 const config = require('../config/development_config');
 const updateAction = require('../models/update_model');
 const formidable = require('formidable');
+const fs = require('fs');
 
 let check = new Check();
 
@@ -98,7 +99,7 @@ module.exports = class Member {
     //確定token是否有輸入
     let testNoNext = false;
     if (testNoNext) {
-      // 如果都不next 那就會等到timeout
+      // 如果都不next也不response 那就會等到timeout
     } else if (check.checkNull(token) === true) {
       res.json({
         err: "請輸入token！"
@@ -170,9 +171,9 @@ module.exports = class Member {
             }
 
             // 確認檔案型態是否為png, jpg, jpeg
-            if (check.checkFileType(files.file.type) === true) {
+            if (check.checkFileType(files.file.mimetype) === true) {
               // 將圖片轉成base64編碼
-              const image = await fileToBase64(files.file.path);
+              const image = await fileToBase64(files.file.filepath);
 
               const id = tokenResult;
 
